@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Header';
+import Posts from './Posts';
+import ImageUpload from './ImageUpload';
+import { useState } from 'react';
 
-function App() {
+function App() { 
+  const [user,setUser]=useState('');
+  const handleUser=(user)=>{
+     setUser(user);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div div className="app">
+          
+        <div className="app__header">
+              <Header user={user} setUser={handleUser}/>   
+          </div>
+          <div className="app__body">
+             <div className='app__post'>
+                 < Posts user={user}/>
+            </div>
+            <div className="app__right">
+               {user?.displayName?
+                 <ImageUpload username={user.displayName}/>
+               : <div><h3>Sign In To Upload</h3></div>
+               }
+              </div>
+            </div>
+        
     </div>
   );
 }
